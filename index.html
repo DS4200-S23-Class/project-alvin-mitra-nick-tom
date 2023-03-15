@@ -15,12 +15,26 @@
 
     <div>
         <h2>Motivation</h2>
-        TODO: Add motivation / use case here 
+        <p>As 4 highly passionate NBA fans and previous high school basketball athletes, it was no surprise to look to our favorite interest when it came time to select a project topic. The domain tasks that our project will support are vital in analyzing player performance in sports. The data that we will be visualizing includes various statistics related to player performance from the 2021-2022 season, such as points, rebounds, assists, and field goal percentages collected from a website called basketball reference.</p>
+
+        <p>The first domain task we want to add will allow users to compare player performance across positions, with specific filters for each position and statistic, as the effectiveness of some positions is determined by different statistics. This specific domain task is important as it allows users to compare players on the statistics that matter for a certain play style a user is looking to find.</p>
+
+        <p>The second domain task we are looking to implement will allow users to see the entire stat line for a player of interest. Our target end-users include coaches, scouts, and general managers who require quick and easy access to player performance data that will allow them to consider new players to trade for or sign in free agency. This is important for our end users, as it allows them to get a sense of what each player succeeds in and struggles in, so they can get a holistic sense of what their play style is all about, and make a judgment call on whether to pursue them or not.</p>
+
+        <p>A particular use case is when general managers are looking to build their team or make some roster changes. For example, if they have identified their need of scoring more points, this tool can help them pinpoint which players have high points per games in comparison to other players in the league as well as their scoring efficiency. On the other hand, if they want to drop a player to increase their cap space, they can look at which players have the lowest FG% to determine which players are taking more shots and scoring less points. Other decisions regarding roster changes can be aided to using our visualization.</p>
     </div>
 
     <div>
         <h2>Background</h2>
-        TODO: Add link to report, demo video, link to data etc. here  
+        <ul>
+            <h3>Data</h3>
+            <p>The data collected represents the NBA 2021-2022 season data and comes from Basketball Reference, which is a third party organization that allows any individual to easily access the raw data for any given player or season. The data is provided by SportRadar which is the NBA's official statistics recorder and provider. This organization is responsible to collect statistics for every game for every player and team, recording it, and then double checking for any mistakes that were refined after the game had finished.</p>
+
+            <p>Although Basketball Reference is not inherently bias or unethical, the data it presents may be subject to certain bias or unethical considerations. One potential bias is in the way these statistics are recorded. For example, certain statistics such as assists and rebounds could be subject to the referee and scorekeeper of the game and how they view a particular play. Additionally, certain top players are favored, consciously or subconsciously, based on factors such as popularity or media attention. An ethical consideration that applies to this data is that personal information about every player is publicly available. Although these players provide consent of their performance being tracked and published in their contract, the widespread access can influence how they are valued in the market as players. Nonetheless, the overall gathering and recording of this data is clean in a manner that does not significantly impact the usage of the data.</p>
+
+            <p>The data cleaning we performed started with removing the teams of these players because players can be traded which would complicate the data. It was not relevant as we are strictly interested in the performance of the player rather than their affiliation to a particular team. As a result, for players that played on multiple teams we removed the multiple rows but replaced them with an accumulation column. The data itself was relatively clean. There are instances of missing values but these are always percentage calculations that occur when players have not attempted a particular shot.</p>
+        </ul>
+        
     </div>
 
     <div>
@@ -30,7 +44,11 @@
 
     <div>
         <h2>Acknowledgements</h2>
-        TODO: Cite resources used here   
+        <div>
+            <ul>
+                <li><a href="https://www.basketball-reference.com/leagues/NBA_2022_totals.html">Basketball Reference Data</a></li>
+            </ul>
+        </div>
     </div>
 
 
