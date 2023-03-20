@@ -47,6 +47,56 @@
         <div id="column">
           <div id="left-vis">
             <h2 class="center">Title</h2>
+
+            <!-- Add checkbox filter for years -->
+            <div class="position-filter">
+              <h4>Filter By Position</h4>
+              <input class="position-button" id="PG" value="PG" type="checkbox" checked="checked">PG</input>
+              <input class="position-button" id="SG" value="SG" type="checkbox" checked="checked">SG</input>
+              <input class="position-button" id="SF" value="SF" type="checkbox" checked="checked">SF</input>
+              <input class="position-button" id="PF" value="PF" type="checkbox" checked="checked">PF</input>
+              <input class="position-button" id="C" value="C" type="checkbox" checked="checked">C</input>
+
+              <form>
+
+                <div>
+                    <!--These are all the options for the x-axis-->
+                    <p1>Choose the x-axis statistic for your visual.</p1>
+                        <select id="xAxisStat">
+                            <option>G</option>
+                            <option>GS</option>
+                            <option>MP</option>
+                            <option>FG</option>
+                            <option>FG%</option>
+                            <option>3P</option>
+                            <option>3P%</option>
+                            <option>2P</option>
+                            <option>2P%</option>
+                            <option>eFG%</option>
+                            <option>FT</option>
+                            <option>FT%</option>
+                            <option>ORB</option>
+                            <option>DRB</option>
+                            <option>TRB</option>
+                            <option>TRBPG</option>
+                            <option>AST</option>
+                            <option>ASTPG</option>
+                            <option>STL</option>
+                            <option>STLPG</option>
+                            <option>BLK</option>
+                            <option>BLKPG</option>
+                            <option>TOV</option>
+                            <option>TOVPG</option>
+                            <option>PF</option>
+                            <option>PFPG</option>
+                            <option>PTS</option>
+                            <option>PPG</option>	
+                        </select>
+                </div>
+    
+                <!--This adds the button to add the point-->
+                <button type='button' id='selectStat'>Select x-axis stat</button>
+           </div>
           </div>
         </div>
                 

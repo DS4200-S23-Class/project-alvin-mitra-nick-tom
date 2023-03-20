@@ -58,20 +58,58 @@ function build_scatter() {
           .attr("class", "point")
           .attr("opacity", "50%");
 
-    // adds x axis labels
+    // adds x axis labels spacing 
     FRAME1.append("g") 
           .attr("transform", "translate(" + MARGINS.left + 
                 "," + (VIS_HEIGHT + MARGINS.top) + ")") 
           .call(d3.axisBottom(X_SCALE).ticks(8)) 
             .attr("font-size", '10px');
 
-    // adds y axis labels
+    // adds y axis labels spacing 
     FRAME1.append("g") 
           .attr("transform", "translate(" + MARGINS.left + 
                 "," + MARGINS.top + ")")
           .call(d3.axisLeft(Y_SCALE).ticks(14)) 
             .attr("font-size", '10px');
+
+  // Filter plot by selected player position 
+  d3.selectAll(".position-button").on("change", function () {
+    let selected_position = this.value, 
+    position_display = this.checked ? "inline" : "none";
+
+    console.log(position_display);
+
+    FRAME1.selectAll(".point")
+        .filter(function(d) { return d.Position == selected_position; })
+        .attr("display", position_display);
+  });
+
+    // Filter plot by selected statistic to compare against player efficiency
+    d3.selectAll(".selectStat").on("change", function () {
+      let selected_position = this.value, 
+      position_display = this.checked ? "inline" : "none";
+  
+      console.log(position_display);
+  
+      FRAME1.selectAll(".point")
+          .filter(function(d) { return d.value == selected_position; })
+          .attr("display", position_display);
+    });
 	});
+
+  //adding x-axis label 
+  FRAME1.append("text")
+   .attr("transform", "translate(" + (FRAME_WIDTH/2) + " ," + (FRAME_HEIGHT) + ")")
+   .style("text-anchor", "middle")
+   .text("Total Points Scored");
+
+   FRAME1.append("text")
+   .attr("transform", "rotate(-90)")
+   .attr("x", -(FRAME_HEIGHT/2))
+   .attr("y", 15)
+   .style("text-anchor", "middle")
+   .text("Player Efficiency");
+
 }
 
 build_scatter();
