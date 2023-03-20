@@ -9,29 +9,50 @@ const FRAME1 = d3.select("#left-vis")
                     .attr("height", FRAME_HEIGHT)   
                     .attr("width", FRAME_WIDTH)
                     .attr("class", "frame"); 
+let column = "PPG";
 
 function build_scatter() {
   // Load csv
   d3.csv("data.csv").then((data) => {
     
-    // Define scale functions that maps our data values 
-    // (domain) to pixel values (range)
+    const getValue = (d, key) => parseInt(d[key]);
 
-	const MAX_X = d3.max(data, (d) => {
-		return parseInt(d.PTS)})
+    const getMaxValue = (data, columnName) => {
+      return d3.max(data, d => getValue(d, columnName));
+    };
 
-	const MIN_X = d3.min(data, (d) => {
-		return parseInt(d.PTS)})
+    const getMinValue = (data, columnName) => {
+      return d3.min(data, d => getValue(d, columnName));
+    };
 
-	const AVG_X = d3.mean(data, (d) => {
-		return parseInt(d.PTS)})
+    const getAvgValue = (data, columnName) => {
+      return d3.mean(data, d => getValue(d, columnName));
+    };
 
-    const X_SCALE = d3.scaleLinear() 
-                      .domain([MIN_X, MAX_X + AVG_X]) //the x-axis range
-                      .range([0, VIS_WIDTH]);
 
-    const MAX_Y = d3.max(data, (d) => {
-		return parseInt(d.EFF)})
+
+	const MAX_X = getMaxValue(data, column);
+
+  const MIN_X = getMinValue(data, column);
+
+  const AVG_X = getAvgValue(data, column);
+
+
+
+    // Use the function to get the value of a specified column for a given data object
+  const getColumnValue = (d, columnName) => getValue(d, column);
+
+  // Use the function to set the 'cx' attribute of a circle based on a specified column
+  const setCircleCx = (d, columnName) => {
+    return X_SCALE(getColumnValue(d, column)) + MARGINS.left;
+  };
+
+  const X_SCALE = d3.scaleLinear() 
+                    .domain([MIN_X, MAX_X + AVG_X]) //the x-axis range
+                    .range([0, VIS_WIDTH]);
+
+  const MAX_Y = d3.max(data, (d) => {
+    return parseInt(d.EFF)})
 
 	const MIN_Y = d3.min(data, (d) => {
 		return parseInt(d.EFF)})
@@ -52,7 +73,7 @@ function build_scatter() {
         .data(data) // passed from .then  
         .enter()       
         .append("circle")  
-          .attr("cx", (d) => { return (X_SCALE(d.PTS) + MARGINS.left); }) 
+          .attr("cx", (d) => setCircleCx(d, 'ORB'))
           .attr("cy", (d) => { return (Y_SCALE(d.EFF) + MARGINS.top); }) 
           .attr("r", 4)
           .attr("class", "point")
@@ -82,19 +103,30 @@ function build_scatter() {
     FRAME1.selectAll(".point")
         .filter(function(d) { return d.Position == selected_position; })
         .attr("display", position_display);
+
+    selectAxis();
+
   });
 
-    // Filter plot by selected statistic to compare against player efficiency
-    d3.selectAll(".selectStat").on("change", function () {
-      let selected_position = this.value, 
-      position_display = this.checked ? "inline" : "none";
+  function selectAxis() {
+    column = document.getElementById('xAxisStat')
+    console.log(axis)
+  }
   
-      console.log(position_display);
+
+    // // Filter plot by selected statistic to compare against player efficiency
+    // d3.selectAll(".selectStat").on("change", function () {
+    //   let selected_position = this.value, 
+    //   position_display = this.checked ? "inline" : "none";
   
-      FRAME1.selectAll(".point")
-          .filter(function(d) { return d.value == selected_position; })
-          .attr("display", position_display);
-    });
+    //   console.log(position_display);
+  
+    //   FRAME1.selectAll(".point")
+    //       .filter(function(d) { return d.value == selected_position; })
+    //       .attr("display", position_display);
+    // });
+
+    //Filter by the x-axis selection done by the user 
 	});
 
   //adding x-axis label 
