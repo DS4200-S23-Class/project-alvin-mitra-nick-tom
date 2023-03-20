@@ -19,7 +19,7 @@ function build_scatter() {
     let column = document.getElementById("xAxisStat").value;
     console.log(column)
     
-    const getValue = (d, key) => parseInt(d[key]);
+    const getValue = (d, key) => parseFloat(d[key]);
 
     const getMaxValue = (data, columnName) => {
       return d3.max(data, d => getValue(d, columnName));
@@ -56,13 +56,13 @@ function build_scatter() {
                     .range([0, VIS_WIDTH]);
 
   const MAX_Y = d3.max(data, (d) => {
-    return parseInt(d.EFF)})
+    return parseFloat(d.EFF)})
 
 	const MIN_Y = d3.min(data, (d) => {
-		return parseInt(d.EFF)})
+		return parseFloat(d.EFF)})
 
 	const AVG_Y = d3.mean(data, (d) => {
-		return parseInt(d.EFF)})
+		return parseFloat(d.EFF)})
 
     // Define scale functions that maps our data values 
     // (domain) to pixel values (range)
@@ -113,31 +113,16 @@ function build_scatter() {
   });
 
   function selectAxis() {
-    column = document.getElementById('xAxisStat')
-    console.log(axis)
+    let column = document.getElementById('xAxisStat')
   }
-  
-
-    // // Filter plot by selected statistic to compare against player efficiency
-    // d3.selectAll(".selectStat").on("change", function () {
-    //   let selected_position = this.value, 
-    //   position_display = this.checked ? "inline" : "none";
-  
-    //   console.log(position_display);
-  
-    //   FRAME1.selectAll(".point")
-    //       .filter(function(d) { return d.value == selected_position; })
-    //       .attr("display", position_display);
-    // });
-
-    //Filter by the x-axis selection done by the user 
 	});
 
   //adding x-axis label 
+  let column = document.getElementById("xAxisStat").value;
   FRAME1.append("text")
    .attr("transform", "translate(" + (FRAME_WIDTH/2) + " ," + (FRAME_HEIGHT) + ")")
    .style("text-anchor", "middle")
-   .text("Total Points Scored");
+   .text(column);
 
    FRAME1.append("text")
    .attr("transform", "rotate(-90)")
