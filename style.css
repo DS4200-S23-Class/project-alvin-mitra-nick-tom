@@ -5,3 +5,19 @@ body {
 h1 {
     text-align: center;
 }
+
+/* Centers the headers */
+.center {
+    text-align: center;
+}
+
+/* Flexbox */
+.flexbox {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Each column takes half of the webpage */
+#column {
+    flex:50%;
+}
