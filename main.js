@@ -9,11 +9,15 @@ const FRAME1 = d3.select("#left-vis")
                     .attr("height", FRAME_HEIGHT)   
                     .attr("width", FRAME_WIDTH)
                     .attr("class", "frame"); 
-let column = "PPG";
+
+
 
 function build_scatter() {
   // Load csv
   d3.csv("data.csv").then((data) => {
+
+    let column = document.getElementById("xAxisStat").value;
+    console.log(column)
     
     const getValue = (d, key) => parseInt(d[key]);
 
@@ -145,3 +149,16 @@ function build_scatter() {
 }
 
 build_scatter();
+
+function clearFrame() {
+  FRAME1.selectAll("*").remove();
+  build_scatter();
+}
+
+
+document.getElementById("selectStat")
+    .addEventListener('click', clearFrame);
+
+
+
+
