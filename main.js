@@ -74,7 +74,7 @@ function build_scatter() {
     // Plots the petal and sepal length points with 50% opacity and 
     // colors accordingly to species type
     const circles = FRAME1.selectAll("points")  
-        .data(data) // passed from .then  
+        .data(data.filter(d => !isNaN(getValue(d, column)) && !isNaN(parseFloat(d.EFF))))
         .enter()       
         .append("circle")  
           .attr("cx", (d) => setCircleCx(d, 'ORB'))
@@ -143,7 +143,3 @@ function clearFrame() {
 
 document.getElementById("selectStat")
     .addEventListener('click', clearFrame);
-
-
-
-
