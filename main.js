@@ -88,8 +88,8 @@ function build_scatter() {
   function mouseOver(event, d) {
     TOOLTIP.style("opacity", 0.9);
     TOOLTIP.html(`${d.Player}<br>${column}: ${getColumnValue(d, column)}<br>EFF: ${d.EFF}`)
-            .style("left", (event.pageX + 10) + "px")
-            .style("top", (event.pageY - 30) + "px");
+            .style("left", (event.pageX + 30) + "px")
+            .style("top", (event.pageY - 5) + "px");
   }
 
   // When the mouse is off the dot, it stops showing the stats of the player
