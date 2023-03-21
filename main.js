@@ -243,6 +243,40 @@ function build_scatter() {
 
   });
 
+  //      
+  const positionColor = [
+    {"pos": "PG", "color": "blue"},
+    {"pos": "SG", "color": "red"},
+    {"pos": "SF", "color": "orange"},
+    {"pos": "PF", "color": "green"},
+    {"pos": "C", "color": "purple"}
+  ];
+  
+  //
+  const legend = FRAME1.append("g")
+    .attr("transform", `translate(${MARGINS.left},${MARGINS.top})`);
+
+  //
+  legend.selectAll("rect")
+    .data(positionColor)
+    .enter()
+    .append("rect")
+    .attr("x", (d, i) => i * 40)
+    .attr("y", VIS_HEIGHT - 430)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", d => d.color);
+  
+  //
+  legend.selectAll("text")
+    .data(positionColor)
+    .enter()
+    .append("text")
+    .attr("x", (d, i) => i * 42.5)
+    .attr("y", VIS_HEIGHT - 430)
+    .text(d => d.pos)
+    .attr("text-anchor", "middle");
+
   function selectAxis() {
     let column = document.getElementById('xAxisStat')
   }
