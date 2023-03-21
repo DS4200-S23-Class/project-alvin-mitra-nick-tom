@@ -105,7 +105,7 @@ function build_scatter() {
 ///////////////////////////////////////////////////////////////////////////////
   // Attempt to start the bar graph, when you click a point, the average and selected player's
   // stats show up
-  /*
+
   function onClick(event, d) {
 
     // Removes an existing graph if there is one already selected
@@ -132,7 +132,7 @@ function build_scatter() {
 
     // Create an x-axis scale for the bar chart
     const xScale = d3.scaleLinear()
-                     .domain([0, d3.max(playerData, d => d.value)])
+                     .domain([0, 1.1 * d3.max(playerData, d => d.value)])
                      .range([0, VIS_WIDTH]);
 
     // Create the y-axis for the bar chart
@@ -155,8 +155,7 @@ function build_scatter() {
     // Add the y-axis to the player graph
     playerGraph.append("g")
                .attr("class", "y-axis")
-               .attr("transform", `translate(${MARGINS.left}, ${MARGINS.top})`)
-               .call(yAxis);
+               .attr("transform", `translate(${MARGINS.left}, ${MARGINS.top})`);
 
     // Create the bars for the player data
     playerGraph.selectAll(".player-bar")
@@ -168,10 +167,33 @@ function build_scatter() {
                .attr("y", d => yScale(d.category) + MARGINS.top)
                .attr("width", d => xScale(d.value))
                .attr("height", yScale.bandwidth()/2)
-               .attr("fill", "steelblue")
+               .attr("fill", "blue")
                .attr("opacity", 0.5);
+
+    playerGraph.selectAll(".player-bar-label")
+                 .data(playerData)
+                 .enter()
+                 .append("text")
+                 .attr("class", "player-bar-label")
+                 .attr("x", d => MARGINS.left + xScale(d.value) + 5)
+                 .attr("y", d => yScale(d.category) + MARGINS.top + yScale.bandwidth()/2 + 5)
+                 .text(d => d.value);
+
+    // Adding the y-axis label that compares the player stat against the average for that stat
+    playerGraph.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -(FRAME_HEIGHT/2))
+                .attr("y", 15)
+                .style("text-anchor", "middle")
+                .text("Average vs. Chosen Player");
+
+    // Adding the x-axis label based on the chosen stat
+    playerGraph.append("text")
+                .attr("transform", "translate(" + (FRAME_WIDTH/2) + " ," + (FRAME_HEIGHT) + ")")
+                .style("text-anchor", "middle")
+                .text(column);
   };
-  */
+
   ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -189,7 +211,7 @@ function build_scatter() {
         .attr("fill", (d) => colorScale(d.Position))
         .on("mouseover", mouseOver)
         .on("mouseout", mouseOut)
-        //.on("click", onClick);
+        .on("click", onClick);
 
   // Adds x axis labels spacing 
   FRAME1.append("g") 
