@@ -270,6 +270,16 @@ build_scatter();
 // This clears the frame of previous points when the user selects a new stat
 function clearFrame() {
   FRAME1.selectAll("*").remove();
+  const pg_checkbox = d3.select('#PG').node();
+  pg_checkbox.checked = true;
+  const sg_checkbox = d3.select('#SG').node();
+  sg_checkbox.checked = true;
+  const sf_checkbox = d3.select('#SF').node();
+  sf_checkbox.checked = true;
+  const pf_checkbox = d3.select('#PF').node();
+  pf_checkbox.checked = true;
+  const c_checkbox = d3.select('#C').node();
+  c_checkbox.checked = true;
   build_scatter();
 }
 
