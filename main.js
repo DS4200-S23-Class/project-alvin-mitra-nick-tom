@@ -53,8 +53,6 @@ function build_scatter() {
   const MIN_X = getMinValue(data, column);
   const AVG_X = getAvgValue(data, column);
 
-
-
   // Use the function to get the value of a specified column for a given data object
   const getColumnValue = (d, columnName) => getValue(d, column);
 
@@ -250,7 +248,7 @@ function build_scatter() {
 
   });
 
-  //      
+  // Dictionary for legend     
   const positionColor = [
     {"pos": "PG", "color": "blue"},
     {"pos": "SG", "color": "red"},
@@ -259,11 +257,11 @@ function build_scatter() {
     {"pos": "C", "color": "purple"}
   ];
   
-  //
+  // Appends legened to Frame 1
   const legend = FRAME1.append("g")
     .attr("transform", `translate(${MARGINS.left},${MARGINS.top})`);
 
-  //
+  // Adds colored rectangles to legend 
   legend.selectAll("rect")
     .data(positionColor)
     .enter()
@@ -274,7 +272,7 @@ function build_scatter() {
     .attr("height", 20)
     .attr("fill", d => d.color);
   
-  //
+  // Adds position to respective rectangles to legend 
   legend.selectAll("text")
     .data(positionColor)
     .enter()
