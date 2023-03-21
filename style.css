@@ -1,7 +1,9 @@
+/* Makes the webpage font arial */
 body {
     font-family: Arial;
 }
 
+/* Centers the main header */
 h1 {
     text-align: center;
 }
@@ -11,7 +13,7 @@ h1 {
     text-align: center;
 }
 
-/* Flexbox */
+/* Creates a flexbox that makes the visualizations side by side */
 .flexbox {
     display: flex;
     flex-direction: row;
@@ -20,4 +22,14 @@ h1 {
 /* Each column takes half of the webpage */
 #column {
     flex:50%;
+}
+
+/*This customizes the tooltip bar when a user hovers over a line on the bar graph*/
+.tooltip {
+    position: absolute;
+    background-color: lightgrey;
+    border:  solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 5px;
 }

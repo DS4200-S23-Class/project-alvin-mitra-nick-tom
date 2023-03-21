@@ -1,3 +1,4 @@
+<!-- Creates the HTML page -->
 <!DOCTYPE html>
 <html> 
 
@@ -6,15 +7,18 @@
     <link rel="stylesheet" type="text/css" href="style.css">
      <script src='js/d3.v6.1.1/d3.min.js'></script>
 
+    <!-- Creates the title of page -->
     <title>NBA Player Stats</title>
 </head>
 
 
 <body>
 
+    <!-- Creates the header for te website -->
     <h1>2021-2022 NBA Player Statistics</h1>
 
     <div>
+        <!-- Lists the motivation for the project -->
         <h2>Motivation</h2>
         <p>As 4 highly passionate NBA fans and previous high school basketball athletes, it was no surprise to look to our favorite interest when it came time to select a project topic. The domain tasks that our project will support are vital in analyzing player performance in sports. The data that we will be visualizing includes various statistics related to player performance from the 2021-2022 season, such as points, rebounds, assists, and field goal percentages collected from a website called basketball reference.</p>
 
@@ -28,6 +32,7 @@
     <div>
         <h2>Background</h2>
         <ul>
+            <!-- Lists information on the data collected for the project -->
             <h3>Data</h3>
             <p>The data collected represents the NBA 2021-2022 season data and comes from Basketball Reference, which is a third party organization that allows any individual to easily access the raw data for any given player or season. The data is provided by SportRadar which is the NBA's official statistics recorder and provider. This organization is responsible to collect statistics for every game for every player and team, recording it, and then double checking for any mistakes that were refined after the game had finished.</p>
 
@@ -38,17 +43,18 @@
         
     </div>
 
-    <!-- Flexbox -->
+    <!-- Creates a flexbox -->
     <div class="flexbox">
 
+        <!-- The part of the document for the visualization -->
         <h2>Visualization</h2>
 
         <!-- Left Column -->
         <div id="column">
           <div id="left-vis">
-            <h2 class="center">Title</h2>
+            <h3 class="center">Player Efficiency vs Filtered Stat</h3>
 
-            <!-- Add checkbox filter for years -->
+            <!-- Add checkbox filter for position -->
             <div class="position-filter">
               <h4>Filter By Position</h4>
               <input class="position-button" id="PG" value="PG" type="checkbox" checked="checked">PG</input>
@@ -94,7 +100,7 @@
                         </select>
                 </div>
     
-                <!--This adds the button to add the point-->
+                <!--This adds the button to add the points for each player-->
                 <button type='button' id='selectStat'>Select x-axis stat</button>
            </div>
           </div>
@@ -102,8 +108,8 @@
                 
         <!-- Right Column -->
         <div id="column">
-          <div id="right">
-            <h2 class="center">Title</h2>
+          <div id="right-vis">
+            <h3 class="center">Count of Each Position</h3>
           </div>
         </div>
   
@@ -111,6 +117,7 @@
     
 
     <div>
+        <!-- The acknowledgements page -->
         <h2>Acknowledgements</h2>
         <div>
             <ul>
@@ -119,6 +126,7 @@
         </div>
     </div>
 
+    <!-- Links the javascript file -->
     <script src='main.js'></script>
 </body>
 
