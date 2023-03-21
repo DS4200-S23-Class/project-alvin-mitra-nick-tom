@@ -19,6 +19,13 @@ function build_scatter() {
   // Loads the csv file
   d3.csv("data.csv").then((data) => {
 
+  data.slice(0, 10).forEach(function(d) {
+    for (const prop in d) {
+      console.log(`${prop}: ${d[prop]}`);
+    }
+    console.log('---'); // optional separator for each line
+  });
+
   // Prints a console log statement of the chosen stat line filter after button is clicked
   let column = document.getElementById("xAxisStat").value;
   console.log(column)
