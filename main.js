@@ -99,7 +99,9 @@ function build_scatter() {
 
   // When the mouse is off the dot, it stops showing the stats of the player
   function mouseOut() {
-      TOOLTIP.style("opacity", 0);
+      TOOLTIP.style("opacity", 0)
+              .style("left", (event.pageX + 30) + "px")
+              .style("top", (event.pageY - 1000) + "px");
   }
  
   // Each position is a different color
@@ -107,14 +109,12 @@ function build_scatter() {
       .domain(['PG', 'SG', 'SF', 'PF', 'C'])
       .range(['blue', 'red', 'orange', 'green', 'purple']);
 
-///////////////////////////////////////////////////////////////////////////////
-  // Attempt to start the bar graph, when you click a point, the average and selected player's
+  // Makes a bar graph, when you click a point; the average and selected player's
   // stats show up
-
   function onClick(event, d) {
 
     // Removes an existing graph if there is one already selected
-    d3.select("#right-vis").selectAll("*").remove();
+    d3.select("#right-vis").select("svg").remove();
 
     // Create a new svg element for the player graph
     const playerGraph = d3.select("#right-vis")
@@ -123,10 +123,13 @@ function build_scatter() {
                           .attr("width", FRAME_WIDTH)
                           .attr("class", "frame");
 
+    // Gets the first name of the selected player
+    const first = d.Player.split(' ')[0]
+
     // Data for the player's stat and the average stat
     const playerData = [
-      {"category": "Player Stat", "value": getColumnValue(d, column).toFixed(2)},
-      {"category": "Average Stat", "value": AVG_X.toFixed(2)}
+      {"category": first, "value": getColumnValue(d, column).toFixed(2), "efficiency": d.EFF},
+      {"category": "Average", "value": AVG_X.toFixed(2)}
     ];
 
     // Create a y-axis scale for the bar chart
@@ -143,7 +146,7 @@ function build_scatter() {
     // Create the y-axis for the bar chart
     const yAxis = d3.axisLeft(yScale);
 
-      // Adds x axis labels spacing 
+    // Adds x axis labels spacing 
     playerGraph.append("g") 
           .attr("transform", "translate(" + MARGINS.left + 
                 "," + (VIS_HEIGHT + MARGINS.top) + ")") 
@@ -162,7 +165,16 @@ function build_scatter() {
                .attr("class", "y-axis")
                .attr("transform", `translate(${MARGINS.left}, ${MARGINS.top})`);
 
-    // Create the bars for the player data
+    // When the mouse is over the line in the bar graph, it shows the player name and 
+    // the stats of the player
+    function mouseOver2(event, d) {
+      TOOLTIP.style("opacity", 0.9);
+      TOOLTIP.html(`${d.category}<br>${column}: ${d.value}<br>EFF: ${d.efficiency}`)
+              .style("left", (event.pageX + 30) + "px")
+              .style("top", (event.pageY - 5) + "px");
+    }
+
+    // Create the bars for the player data and average data
     playerGraph.selectAll(".player-bar")
                .data(playerData)
                .enter()
@@ -173,8 +185,11 @@ function build_scatter() {
                .attr("width", d => xScale(d.value))
                .attr("height", yScale.bandwidth())
                .attr("fill", "blue")
-               .attr("opacity", 0.5);
+               .attr("opacity", 0.5)
+               .on("mouseover", mouseOver2)
+               .on("mouseout", mouseOut);
 
+    // Sets the label of the stat value next to the bar line
     playerGraph.selectAll(".player-bar-label")
                  .data(playerData)
                  .enter()
@@ -198,9 +213,6 @@ function build_scatter() {
                 .style("text-anchor", "middle")
                 .text(column);
   };
-
-  ///////////////////////////////////////////////////////////////////////////////
-
 
   // Plots the player points based on the chosen stat with 50% opacity and 
   // colors accordingly to position type
@@ -281,10 +293,6 @@ function build_scatter() {
     .attr("y", VIS_HEIGHT - 430)
     .text(d => d.pos)
     .attr("text-anchor", "middle");
-
-  function selectAxis() {
-    let column = document.getElementById('xAxisStat')
-  }
 });
 
   // Adding the x-axis label based on the chosen stat
