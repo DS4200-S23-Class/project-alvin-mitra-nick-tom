@@ -1,7 +1,7 @@
 // Constants for the frame dimensions
 const FRAME_HEIGHT = 500;
 const FRAME_WIDTH = 500; 
-const MARGINS = {left: 50, right: 50, top: 50, bottom: 50};
+const MARGINS = {left: 67, right: 67, top: 50, bottom: 50};
 const VIS_HEIGHT = FRAME_HEIGHT - MARGINS.top - MARGINS.bottom;
 const VIS_WIDTH = FRAME_WIDTH - MARGINS.left - MARGINS.right; 
 
@@ -49,7 +49,7 @@ function build_scatter() {
   };
 
   // The min, max and average are stored in these variables
-	const MAX_X = getMaxValue(data, column);
+  const MAX_X = getMaxValue(data, column);
   const MIN_X = getMinValue(data, column);
   const AVG_X = getAvgValue(data, column);
 
@@ -71,12 +71,12 @@ function build_scatter() {
     return parseFloat(d.EFF)})
 
   // Find the minimum value of the "EFF" column in the dataset 
-	const MIN_Y = d3.min(data, (d) => {
-		return parseFloat(d.EFF)})
+  const MIN_Y = d3.min(data, (d) => {
+    return parseFloat(d.EFF)})
 
   // Find the average value of the "EFF" column in the dataset 
-	const AVG_Y = d3.mean(data, (d) => {
-		return parseFloat(d.EFF)})
+  const AVG_Y = d3.mean(data, (d) => {
+    return parseFloat(d.EFF)})
 
   // Define scale functions that maps our data values (domain) to pixel values (range)
   const Y_SCALE = d3.scaleLinear()
@@ -133,12 +133,12 @@ function build_scatter() {
     const yScale = d3.scaleBand()
                      .domain(playerData.map(d => d.category))
                      .range([0, VIS_HEIGHT])
-                     .paddingInner(0.5);
+                     .paddingInner(0.65);
 
     // Create an x-axis scale for the bar chart
-    const xScale = d3.scaleLinear()
-                     .domain([0, 1.1 * d3.max(playerData, d => d.value)])
-                     .range([0, VIS_WIDTH]);
+    const xScale = d3.scaleLinear() 
+                      .domain([MIN_X, MAX_X])
+                      .range([0, VIS_WIDTH - 5]);
 
     // Create the y-axis for the bar chart
     const yAxis = d3.axisLeft(yScale);
@@ -147,7 +147,7 @@ function build_scatter() {
     playerGraph.append("g") 
           .attr("transform", "translate(" + MARGINS.left + 
                 "," + (VIS_HEIGHT + MARGINS.top) + ")") 
-          .call(d3.axisBottom(xScale).ticks(10)) 
+          .call(d3.axisBottom(xScale).ticks(8)) 
           .attr("font-size", '10px');
 
     // adds y axis labels spacing 
@@ -171,7 +171,7 @@ function build_scatter() {
                .attr("x", MARGINS.left)
                .attr("y", d => yScale(d.category) + MARGINS.top)
                .attr("width", d => xScale(d.value))
-               .attr("height", yScale.bandwidth()/2)
+               .attr("height", yScale.bandwidth())
                .attr("fill", "blue")
                .attr("opacity", 0.5);
 
