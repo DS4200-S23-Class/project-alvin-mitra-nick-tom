@@ -174,6 +174,11 @@ function build_scatter() {
               .style("top", (event.pageY - 5) + "px");
     }
 
+    // This adds a border feature so when a point is clicked, a black border is added
+    d3.selectAll("circle").style("stroke", null);
+    d3.select(this).style("stroke", "black")
+                    .style("stroke-width", 3);
+
     // Create the bars for the player data and average data
     playerGraph.selectAll(".player-bar")
                .data(playerData)
