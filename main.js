@@ -48,6 +48,11 @@ function build_scatter() {
     return d3.mean(data, d => getValue(d, columnName));
   };
 
+  // Finds the average value associated with a particular column and position in the dataset
+  const getAvgPosValue = (data, columnName) => {
+    return d3.mean(data, d => getValue(d, columnName));
+  };
+
   // The min, max and average are stored in these variables
   const MAX_X = getMaxValue(data, column);
   const MIN_X = getMinValue(data, column);
@@ -125,11 +130,17 @@ function build_scatter() {
 
     // Gets the first name of the selected player
     const first = d.Player.split(' ')[0]
+    const position = d.Position
 
-    // Data for the player's stat and the average stat
+    // Filters the data given teh selected position and gets averages of selected attribute 
+    const filtered = data.filter(d => d.Position === position);
+    const AVG_POS_X = getAvgPosValue(filtered, column);
+      
+    // Data for the player's stat and the average stat by position and total NBA average
     const playerData = [
       {"category": first, "value": getColumnValue(d, column).toFixed(2), "efficiency": d.EFF},
-      {"category": "Average", "value": AVG_X.toFixed(2)}
+      {"category": position + " " + "Avg", "value": AVG_POS_X.toFixed(2)},
+      {"category": "NBA Avg", "value": AVG_X.toFixed(2)} 
     ];
 
     // Create a y-axis scale for the bar chart
