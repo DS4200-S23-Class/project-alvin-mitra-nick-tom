@@ -4,7 +4,7 @@ body {
 }
 
 /* Centers the main header */
-h1 {
+h1, h2 {
     text-align: center;
 }
 
