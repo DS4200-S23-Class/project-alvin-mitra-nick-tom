@@ -135,12 +135,18 @@ function build_scatter() {
     // Filters the data given teh selected position and gets averages of selected attribute 
     const filtered = data.filter(d => d.Position === position);
     const AVG_POS_X = getAvgPosValue(filtered, column);
+
+    // Gets the average efficiency of the respective position based on the player clicked
+    const AVG_POS_EFF = getAvgPosValue(filtered, "EFF");
+    
+    // Gets the average efficiency of entire league
+    const AVG_EFF = getAvgValue(data, "EFF");
       
     // Data for the player's stat and the average stat by position and total NBA average
     const playerData = [
       {"category": first, "value": getColumnValue(d, column).toFixed(2), "efficiency": d.EFF},
-      {"category": position + " " + "Avg", "value": AVG_POS_X.toFixed(2)},
-      {"category": "NBA Avg", "value": AVG_X.toFixed(2)} 
+      {"category": position + " " + "Avg", "value": AVG_POS_X.toFixed(2), "efficiency": AVG_POS_EFF.toFixed(2)},
+      {"category": "NBA Avg", "value": AVG_X.toFixed(2), "efficiency": AVG_EFF.toFixed(2)}
     ];
 
     // Create a y-axis scale for the bar chart
