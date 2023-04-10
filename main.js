@@ -129,7 +129,6 @@ function build_scatter() {
                           .attr("class", "frame");
 
     // Gets the first name of the selected player
-    const first = d.Player.split(' ')[0]
     const last = d.Player.split(' ')[1]
     const position = d.Position
 
@@ -145,7 +144,7 @@ function build_scatter() {
       
     // Data for the player's stat and the average stat by position and total NBA average
     const playerData = [
-      {"category": first + " " + last, "value": getColumnValue(d, column).toFixed(2), "efficiency": d.EFF},
+      {"category": last, "value": getColumnValue(d, column).toFixed(2), "efficiency": d.EFF},
       {"category": position + " " + "Avg", "value": AVG_POS_X.toFixed(2), "efficiency": AVG_POS_EFF.toFixed(2)},
       {"category": "NBA Avg", "value": AVG_X.toFixed(2), "efficiency": AVG_EFF.toFixed(2)}
     ];
