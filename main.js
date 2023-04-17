@@ -278,7 +278,6 @@ function build_scatter() {
         .attr("display", position_display)
         .attr("class", "point");
 
-    selectAxis();
 
   });
 
