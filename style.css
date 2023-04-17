@@ -24,7 +24,7 @@ h1, h2 {
     flex:50%;
 }
 
-/*This customizes the tooltip bar when a user hovers over a line on the bar graph*/
+/*This customizes the tooltip bar when a user hovers over a line on the bar graph */
 .tooltip {
     position: absolute;
     background-color: lightgrey;
